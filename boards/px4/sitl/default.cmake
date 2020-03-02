@@ -52,7 +52,6 @@ px4_add_board(
 		uuv_att_control
 
 	SYSTEMCMDS
-		#config
 		#dumpfile
 		dyn
 		esc_calib
