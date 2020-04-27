@@ -1,0 +1,36 @@
+#!/bin/sh
+#
+# @name Tiltrotor Birotor
+#
+# @type Tiltorotor Birotor
+#
+# @maintainer Isidro Arias <isidroariass@hotmail.es>
+#
+
+sh /etc/init.d/rc.mc_defaults
+
+# Default parameters
+#if [ $AUTOCNF = yes ]
+#then
+##	## EKF2
+##        param set EKF2_ABIAS_INIT 0.05 
+##        param set EKF2_ABL_GYRLIM 0.1
+##        param set EKF2_ACC_NOISE 0.1
+##        param set EKF2_ANGERR_INIT 0.02
+##        param set EKF2_GBIAS_INIT 0.02
+##        param set EKF2_GPS_V_GATE 50
+##        param set EKF2_GPS_V_NOISE 0.05 
+##        param set EKF2_GYR_NOISE 0.001
+##
+##        ## MPC
+##        param set MPC_PITCHRATE_P 1.579
+##        param set MPC_PITCHRATE_D 0.103 
+##
+##        ## MC
+##        param set MC_ACRO_P_MAX 200
+##        param set MC_ACRO_R_MAX 200
+##
+##        param set MC_MIN_FZ 0
+#fi
+
+set MIXER tiltrotor_birotor 

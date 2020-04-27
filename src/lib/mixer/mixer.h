@@ -917,3 +917,117 @@ private:
 	HelicopterMixer(const HelicopterMixer &);
 	HelicopterMixer operator=(const HelicopterMixer &);
 };
+
+
+
+
+/**
+ * Mixer de un tiltrotor- birotor.
+ * Copied from multirotor mixer and added de function mixer_tiltrotor
+ */
+class TiltrotorMixer : public Mixer
+{
+public:
+
+	struct Rotor {
+		float	roll_scale;	
+		float	pitch_scale;	
+		float	yaw_scale;	
+		float	thrust_scale;	
+	};
+
+	TiltrotorMixer(ControlCallback control_cb,
+			uintptr_t cb_handle,
+			MultirotorGeometry geometry,
+			float roll_scale,
+			float pitch_scale,
+			float yaw_scale,
+			float idle_speed);
+
+	TiltrotorMixer(ControlCallback control_cb,
+			uintptr_t cb_handle,
+			Rotor *rotors,
+			unsigned rotor_count);
+
+	~TiltrotorMixer();
+
+	static TiltrotorMixer		*from_text(Mixer::ControlCallback control_cb, uintptr_t cb_handle, const char *buf,
+			unsigned &buflen);
+
+	unsigned		mix(float *outputs, unsigned space) override;
+	uint16_t		get_saturation_status(void) override;
+	void			groups_required(uint32_t &groups) override;
+
+	void 			set_max_delta_out_once(float delta_out_max) override { _delta_out_max = delta_out_max; }
+
+	unsigned set_trim(float trim) override
+	{
+		return _rotor_count;
+	}
+
+	unsigned get_trim(float *trim) override
+	{
+		return _rotor_count;
+	}
+
+	void			set_thrust_factor(float val) override { _thrust_factor = val; }
+
+	void 			set_airmode(Airmode airmode) override;
+
+	union saturation_status {
+		struct {
+			uint16_t valid		: 1; 
+			uint16_t motor_pos	: 1; 
+			uint16_t motor_neg	: 1; 
+			uint16_t roll_pos	: 1; 
+			uint16_t roll_neg	: 1; 
+			uint16_t pitch_pos	: 1; 
+			uint16_t pitch_neg	: 1; 
+			uint16_t yaw_pos	: 1; 
+			uint16_t yaw_neg	: 1; 
+			uint16_t thrust_pos	: 1; 
+			uint16_t thrust_neg	: 1; 
+		} flags;
+		uint16_t value;
+	};
+
+private:
+	float compute_desaturation_gain(const float *desaturation_vector, const float *outputs, saturation_status &sat_status,
+					float min_output, float max_output) const;
+
+	void minimize_saturation(const float *desaturation_vector, float *outputs, saturation_status &sat_status,
+				 float min_output = 0.f, float max_output = 1.f, bool reduce_only = false) const;
+
+	inline void mix_airmode_rp(float roll, float pitch, float yaw, float thrust, float *outputs);
+
+	inline void mix_airmode_rpy(float roll, float pitch, float yaw, float thrust, float *outputs);
+
+	inline void mix_airmode_disabled(float roll, float pitch, float yaw, float thrust, float *outputs);
+
+	// This funcition is the difference from multirotor mixer
+	inline void mix_tiltrotor(float tau_x, float tau_y, float tau_z, float thrust, float *outputs);
+
+	inline void mix_yaw(float yaw, float *outputs);
+
+	void update_saturation_status(unsigned index, bool clipping_high, bool clipping_low);
+
+	float				_roll_scale;
+	float				_pitch_scale;
+	float				_yaw_scale;
+	float				_idle_speed;
+	float 				_delta_out_max;
+	float 				_thrust_factor;
+
+	Airmode				_airmode;
+
+	saturation_status _saturation_status;
+
+	unsigned			_rotor_count;
+	const Rotor			*_rotors;
+
+	float 				*_outputs_prev = nullptr;
+	float 				*_tmp_array = nullptr;
+
+	TiltrotorMixer(const TiltrotorMixer &);
+	TiltrotorMixer operator=(const TiltrotorMixer &);
+};
