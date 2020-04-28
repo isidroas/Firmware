@@ -22,24 +22,25 @@ source ubuntu_sim.sh
 git clone https://github.com/isidroas/Firmware ~/src/Firmware
 ```
 
+Download the GCS 
+```
+wget ~/ https://github.com/mavlink/qgroundcontrol/releases/download/v4.0.6/QGroundControl.AppImage
+```
+
 Move to source folder 
 
 ```
 cd ~/src/Firmware
 ```
 
-Download the GCS 
-```
-https://github.com/mavlink/qgroundcontrol/releases/download/v4.0.6/QGroundControl.AppImage
-```
-
 Run the simulation 
 
 ```
-make px4_sitl gazebo_tiltrotor_birotor
+make -j 4 px4_sitl gazebo_tiltrotor_birotor
 ```
 
-Open the GCS (instructions from https://docs.qgroundcontrol.com/en/getting_started/download_and_install.html#ubuntu)
+Open and another terminal and start the GCS (instructions from https://docs.qgroundcontrol.com/en/getting_started/download_and_install.html#ubuntu)
+
 ```
 sudo usermod -a -G dialout $USER
 sudo apt-get remove modemmanager -y
