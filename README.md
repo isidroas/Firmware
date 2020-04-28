@@ -1,8 +1,7 @@
-# Automated Tiltrotor Birotor Proyect
+# Autonomous Tiltrotor Birotor Proyect
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/9isC3tmvcgc/0.jpg)](https://www.youtube.com/watch?v=9isC3tmvcgc)
 
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/rLd2zTMaQHI/0.jpg)](https://www.youtube.com/watch?v=rLd2zTMaQHI)
 
 Steps to reproduce simulation in Ubuntu (tested in 18.04):
 
@@ -55,7 +54,8 @@ chmod +x ./QGroundControl.AppImage
 ./QGroundControl.AppImage
 ```
 
-You can now control the tiltrotor through the GCS spawned terminal
+You can now control the tiltrotor through the GCS spawned terminal as shown is the next video
 
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/rLd2zTMaQHI/0.jpg)](https://www.youtube.com/watch?v=rLd2zTMaQHI)
 
 
