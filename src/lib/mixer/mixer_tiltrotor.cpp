@@ -396,7 +396,7 @@ TiltrotorMixer::mix(float *outputs, unsigned space)
 		_outputs_prev[i] = outputs[i];
 
 		// update the saturation status report
-		//update_saturation_status(i, clipping_high, clipping_low);
+		update_saturation_status(i, clipping_high, clipping_low);
 	}
 
 	// this will force the caller of the mixer to always supply new slew rate values, otherwise no slew rate limiting will happen
