@@ -3,7 +3,6 @@
 Steps to reproduce simulation in Ubuntu (tested in 18.04):
 
 
-To prepare the develoment environment, follow the instructions
 
 Dowload script:
 
@@ -17,6 +16,7 @@ Script execution
 source ubuntu_sim.sh
 ```
 
+Clone source code
 
 ```
 git clone https://github.com/isidroas/Firmware ~/src/Firmware
@@ -24,7 +24,7 @@ git clone https://github.com/isidroas/Firmware ~/src/Firmware
 
 Download the GCS 
 ```
-wget ~/ https://github.com/mavlink/qgroundcontrol/releases/download/v4.0.6/QGroundControl.AppImage
+wget -P ~/ https://github.com/mavlink/qgroundcontrol/releases/download/v4.0.6/QGroundControl.AppImage
 ```
 
 Move to source folder 
@@ -39,9 +39,10 @@ Run the simulation
 make -j 4 px4_sitl gazebo_tiltrotor_birotor
 ```
 
-Open and another terminal and start the GCS (instructions from https://docs.qgroundcontrol.com/en/getting_started/download_and_install.html#ubuntu)
+Open another terminal and start the GCS (instructions from https://docs.qgroundcontrol.com/en/getting_started/download_and_install.html#ubuntu)
 
 ```
+cd ~/
 sudo usermod -a -G dialout $USER
 sudo apt-get remove modemmanager -y
 sudo apt install gstreamer1.0-plugins-bad gstreamer1.0-libav -y
