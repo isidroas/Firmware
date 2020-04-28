@@ -59,3 +59,8 @@ You can now control the tiltrotor through the GCS spawned terminal as shown is t
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/rLd2zTMaQHI/0.jpg)](https://www.youtube.com/watch?v=rLd2zTMaQHI)
 
 
+This proyect is detailled in:
+
+https://idus.us.es/handle/11441/94450
+
+
