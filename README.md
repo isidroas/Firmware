@@ -20,11 +20,11 @@ source ubuntu_sim.sh
 Move to source folder 
 
 ```
-cd ~/src/Firmware
+git clone https://github.com/isidroas/Firmware ~/src/Firmware
 ```
 
 Run the simulation 
 
 ```
-make make px4_sitl gazebo_tiltrotor_birotor
+make px4_sitl gazebo_tiltrotor_birotor
 ```
