@@ -8,17 +8,23 @@ To prepare the develoment environment, follow the instructions
 Dowload script:
 
 ```
-wget https://raw.githubusercontent.com/isidroas/ubuntu_sim.sh -O 
+wget https://raw.githubusercontent.com/isidroas/Firmware/tiltrotor-birotor/ubuntu_sim.sh
 ```
 
 Script execution
 
-`source ubuntu_sim.sh` 
+```
+source ubuntu_sim.sh
+```
 
 Move to source folder 
 
-`cd ~/src/Firmware` 
+```
+cd ~/src/Firmware
+```
 
 Run the simulation 
 
-`make make px4_sitl gazebo_tiltrotor_birotor`
+```
+make make px4_sitl gazebo_tiltrotor_birotor
+```
