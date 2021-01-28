@@ -705,6 +705,7 @@ int Ekf2::print_status()
 	PX4_INFO("global position: %s", (_ekf.global_position_is_valid()) ? "valid" : "invalid");
 
 	PX4_INFO("time slip: %" PRId64 " us", _last_time_slip_us);
+	_ekf.print_status();
 
 	perf_print_counter(_ekf_update_perf);
 
@@ -1181,6 +1182,7 @@ void Ekf2::Run()
 
 			// use timestamp from external computer, clocks are synchronized when using MAVROS
 			ev_data.time_us = _ev_odom.timestamp_sample;
+			//PX4_INFO("La posición que se le introduce al ekf(ev_data): \n\t %f\t%f\t%f \n\t%f\t%f\t%f\t%f", double(ev_data.pos(0)), double(ev_data.pos(1)),double(ev_data.pos(2)), double(ev_data.quat(0)), double(ev_data.quat(1)), double(ev_data.quat(2)), double(ev_data.quat(3)));
 			_ekf.setExtVisionData(ev_data);
 
 			ekf2_timestamps.visual_odometry_timestamp_rel = (int16_t)((int64_t)_ev_odom.timestamp / 100 -

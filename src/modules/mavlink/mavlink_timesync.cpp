@@ -82,6 +82,7 @@ MavlinkTimesync::handle_message(const mavlink_message_t *msg)
 				// Calculate the difference of this sample from the current estimate
 				uint64_t deviation = llabs((int64_t)_time_offset - offset_us);
 
+
 				if (rtt_us < MAX_RTT_SAMPLE) {	// Only use samples with low RTT
 
 					if (sync_converged() && (deviation > MAX_DEVIATION_SAMPLE)) {
@@ -92,7 +93,7 @@ MavlinkTimesync::handle_message(const mavlink_message_t *msg)
 						// We reset the filter if we received 5 consecutive samples which violate our present estimate.
 						// This is most likely due to a time jump on the offboard system.
 						if (_high_deviation_count > MAX_CONSECUTIVE_HIGH_DEVIATION) {
-							PX4_ERR("[timesync] Time jump detected. Resetting time synchroniser.");
+							PX4_ERR("[timesync] Time jump detected. Resetting time synchroniser");
 							// Reset the filter
 							reset_filter();
 						}
@@ -117,6 +118,9 @@ MavlinkTimesync::handle_message(const mavlink_message_t *msg)
 
 						// Increment sequence counter after filter update
 						_sequence++;
+
+                        if (_sequence==CONVERGENCE_WINDOW)
+							PX4_INFO("[timesync] Converged");
 
 						// Reset high deviation count after filter update
 						_high_deviation_count = 0;
