@@ -178,7 +178,14 @@ void PositionControl::_velocityControl(const float dt)
 	// see Anti-Reset Windup for PID controllers, L.Rundqwist, 1990
 	const Vector2f acc_sp_xy_limited = Vector2f(_thr_sp) * (CONSTANTS_ONE_G / _hover_thrust);
 	const float arw_gain = 2.f / _gain_vel_p(0);
-	vel_error.xy() = Vector2f(vel_error) - (arw_gain * (Vector2f(_acc_sp) - acc_sp_xy_limited));
+    if (_vel(0)>0.2f || _vel(1)>0.2f )
+	    vel_error.xy() = Vector2f(vel_error) - (arw_gain * (Vector2f(_acc_sp) - acc_sp_xy_limited));
+    //if ((Vector2f(_acc_sp) - acc_sp_xy_limited)!= Vector2f(0,0)){
+    //    PX4_WARN("Se ha saturado la aceleracion");
+    //    PX4_WARN("acc_sp_xy_limited(0): %f",double(acc_sp_xy_limited(0)));
+    //    PX4_WARN("acc_sp_xy_limited(1): %f",double(acc_sp_xy_limited(1)));
+    //}
+    
 
 	// Make sure integral doesn't get NAN
 	ControlMath::setZeroIfNanVector3f(vel_error);
